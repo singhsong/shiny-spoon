@@ -1,17 +1,17 @@
 # shiny-spoon
 
-> In a minute there is time
-> For decisions and revisions which a minute will reverse.
->
-> For I have known them all already, known them all:
-> Have known the evenings, mornings, afternoons,
-> I have measured out my life with coffee spoons;
-> I know the voices dying with a dying fall
-> Beneath the music from a farther room.
->                So how should I presume?
+> In a minute there is time  
+> For decisions and revisions which a minute will reverse.  
+>  
+> For I have known them all already, known them all:  
+> Have known the evenings, mornings, afternoons,  
+> I have measured out my life with coffee spoons;  
+> I know the voices dying with a dying fall  
+> Beneath the music from a farther room.  
+> So how should I presume?  
 
-####IP Specification (Received)
-#####Project Brief
+#### IP Specification (Received)
+##### Project Brief
 Your task is to build a ​todo list application​.
 The application will allow a user to:
  - create new tasks,
@@ -40,7 +40,7 @@ The interface should look similar to the mockup below:
 >> (4) Save and Quit
 >>
 ```
-#####Requirements
+##### Requirements
 The solution __must__ achieve the following requirements:
 - Model a task with
   - a task title,

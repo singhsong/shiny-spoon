@@ -1,5 +1,6 @@
 package com.singhblom;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -21,6 +22,15 @@ public class Main
         Scanner userInput = new Scanner(System.in);
         String userName = userInput.nextLine();
         PrintedThings.welcomeMessage(userName);
+
+        String taskName = PrintedThings.getTask();
+        LocalDate taskDate = PrintedThings.getDueDate();
+
+        Task task1 = new Task(taskName,taskDate);
+
+        System.out.println(task1.getTaskName() + task1.getDueDate().toString());
+
+
 
 
     }

@@ -11,24 +11,21 @@ import java.util.Scanner;
  */
 
 
-//For now this is just a space saver main function
+//
 
 public class Main
 {
     public static void main (String[] args)
     {
-        System.out.println("Hi! Whats your name?");
-        System.out.print("> ");
-        Scanner userInput = new Scanner(System.in);
-        String userName = userInput.nextLine();
-        PrintedThings.welcomeMessage(userName);
+        PrintedThings.welcomeMessage(PrintedThings.getUserName());
 
         String taskName = PrintedThings.getTask();
         LocalDate taskDate = PrintedThings.getDueDate();
 
         Task task1 = new Task(taskName,taskDate);
 
-        System.out.println(task1.getTaskName() + task1.getDueDate().toString());
+        System.out.println(task1.getTaskName() +" "+ task1.getDueDate().toString());
+        task1.whichProject();
 
 
 

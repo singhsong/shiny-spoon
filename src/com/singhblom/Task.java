@@ -1,6 +1,7 @@
 package com.singhblom;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 /**
  * Modeling the task class.
@@ -57,5 +58,23 @@ public class Task
 
     public void setTaskPending(Boolean taskPending) {
         this.taskPending = taskPending;
+    }
+
+    //Gets user-input project and assigns it to a task
+    public void whichProject() {
+        System.out.print("Project: ");
+        System.out.println(">");
+        System.out.print("No project, no problem, just hit enter");
+        Scanner userInput = new Scanner(System.in);
+        String projectName = userInput.nextLine();
+
+        if (projectName.length() > 0)
+        {
+            this.setProjectName(projectName);
+        }
+        else
+        {
+            System.out.println(projectName);
+        }
     }
 }

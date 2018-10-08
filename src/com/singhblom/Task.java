@@ -1,6 +1,8 @@
 package com.singhblom;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -15,7 +17,7 @@ import java.util.Scanner;
 
 
 
-public class Task implements Comparable<Task>
+public class Task
 {
     private String taskName;
     private String projectName = "";
@@ -87,9 +89,5 @@ public class Task implements Comparable<Task>
         return String.format("%s\t%s\t%s", taskName, dueDate, projectName);
     }
 
-    public static Comparator<Task> TaskComparator = new Comparator<Task>()
-    {
-
 
     }
-}

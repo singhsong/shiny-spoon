@@ -1,7 +1,7 @@
 package com.singhblom;
 
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This file contains the instructions and prompts given to the to-do list user
@@ -43,7 +43,7 @@ public abstract class PrintedThings
         return taskDueDate;
     }
 
-    public static void options()
+    public static void mainUserOptions()
     {
         System.out.println("Pick an option:\n" +
                 "(1) Add New Task\n" +
@@ -53,15 +53,30 @@ public abstract class PrintedThings
                 ">>");
     }
 
-    public static void viewList()
+    /**
+     * Implements the logic to print the array list of tasks sorted by due date or project as
+     * desired by the user
+     * This is option 2 of the To-Do main user menu
+     */
+
+    public static void viewList(ArrayList<Task> toDoList)
     {
         System.out.println("View tasks by date or project? (Enter 1 or 2)");
         Scanner userInput = new Scanner(System.in);
         String sortBy = userInput.nextLine();
+
+        //Sorts by due date, ascending
         if (sortBy.equals("1"))
         {
+            Collections.sort(toDoList, Comparator.comparing(Task::getDueDate));
+            System.out.println(toDoList.toString());
+        }
 
-
+        //Sorts by project name first and within a project, by due date, ascending
+        else if (sortBy.equals("2"))
+        {
+            Collections.sort(toDoList, Comparator.comparing(Task::getProjectName).thenComparing(Task::getDueDate));
+            System.out.println(toDoList.toString());
         }
 
 

@@ -25,14 +25,14 @@ public class Main
         //System.out.println(task1.getTaskName() + task1.getDueDate().toString() + task1.getProjectName());
 
         //setting up an loop that only ends when the user enters "bye"
-        //The to-do list options are executed via a switch-case
+        //The to-do list mainUserOptions are executed via a switch-case
 
         String option;
         ArrayList<Task> toDoList = new ArrayList<>();
 
         do
         {
-            PrintedThings.options();
+            PrintedThings.mainUserOptions();
             Scanner userInput = new Scanner(System.in);
             option= userInput.nextLine();
 
@@ -52,9 +52,8 @@ public class Main
 
                 case "2":
                 {
-                    PrintedThings.viewList();
-
-
+                    PrintedThings.viewList(toDoList);
+                    break;
                 }
             }
         }

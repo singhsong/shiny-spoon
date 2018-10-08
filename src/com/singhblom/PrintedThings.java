@@ -51,6 +51,19 @@ public abstract class PrintedThings
                 "(3) Edit Task (update, mark as done, remove)\n" +
                 "(4) Save and Quit\n" +
                 ">>");
+    }
+
+    public static void viewList()
+    {
+        System.out.println("View tasks by date or project? (Enter 1 or 2)");
+        Scanner userInput = new Scanner(System.in);
+        String sortBy = userInput.nextLine();
+        if (sortBy.equals("1"))
+        {
+
+
+        }
+
 
     }
 

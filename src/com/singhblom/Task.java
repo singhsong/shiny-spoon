@@ -3,6 +3,7 @@ package com.singhblom;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+
 /**
  * Modeling the task class.
  *
@@ -14,7 +15,7 @@ import java.util.Scanner;
 
 
 
-public class Task
+public class Task implements Comparable<Task>
 {
     private String taskName;
     private String projectName = "";
@@ -61,7 +62,8 @@ public class Task
     }
 
     //Gets user-input project and assigns it to a task
-    public void whichProject() {
+    public void whichProject()
+    {
         System.out.print("Project: ");
         System.out.println(">");
         System.out.print("No project, no problem, just hit enter");
@@ -76,5 +78,18 @@ public class Task
         {
             System.out.println(projectName);
         }
+    }
+
+    // To print out the task details instead of the hashed code of the task
+    @Override
+    public String toString()
+    {
+        return String.format("%s\t%s\t%s", taskName, dueDate, projectName);
+    }
+
+    public static Comparator<Task> TaskComparator = new Comparator<Task>()
+    {
+
+
     }
 }

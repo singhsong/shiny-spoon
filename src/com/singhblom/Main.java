@@ -52,6 +52,8 @@ public class Main
 
                 case "2":
                 {
+                    PrintedThings.viewList();
+
 
                 }
             }

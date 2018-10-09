@@ -78,7 +78,8 @@ public class Task
         }
         else
         {
-            System.out.println(projectName);
+            projectName = "No project";
+            this.setProjectName(projectName);
         }
     }
 
@@ -86,7 +87,7 @@ public class Task
     @Override
     public String toString()
     {
-        return String.format("%s\t%s\t%s", taskName, dueDate, projectName);
+        return String.format("%s\t%s\t%s\t%s", taskName, dueDate,taskPending,projectName);
     }
 
 

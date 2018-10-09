@@ -11,9 +11,6 @@ import java.util.Scanner;
  *
  */
 
-
-//
-
 public class Main
 {
     public static void main (String[] args)
@@ -38,6 +35,7 @@ public class Main
 
             switch (option)
             {
+                // Enter new task
                 case "1":
                 {
                     String taskName = PrintedThings.getTask();
@@ -50,9 +48,17 @@ public class Main
                     break;
                 }
 
+                // View task list by project or due date
                 case "2":
                 {
                     PrintedThings.viewList(toDoList);
+                    break;
+                }
+
+                // Edit task, mark task as done or remove task from the list
+                case "3":
+                {
+                    PrintedThings.updateTaskList(toDoList);
                     break;
                 }
             }

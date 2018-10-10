@@ -14,8 +14,7 @@ public abstract class PrintedThings
     {
         System.out.println("Hi! Whats your name?");
         System.out.print("> ");
-        Scanner userInput = new Scanner(System.in);
-        String userName = userInput.nextLine();
+        String userName = getUserInput();
         return userName;
     }
     public static void welcomeMessage(String userName)
@@ -29,8 +28,7 @@ public abstract class PrintedThings
     {
         System.out.print("To Do: ");
         System.out.print("> ");
-        Scanner userInput = new Scanner(System.in);
-        String taskName = userInput.nextLine();
+        String taskName = getUserInput();
         return taskName;
     }
 
@@ -38,8 +36,7 @@ public abstract class PrintedThings
     {
         System.out.print("Due on: (YYYY-MM-DD) ");
         System.out.print("> ");
-        Scanner userInput = new Scanner(System.in);
-        LocalDate taskDueDate = LocalDate.parse(userInput.nextLine());
+        LocalDate taskDueDate = LocalDate.parse(getUserInput());
         return taskDueDate;
     }
 
@@ -55,12 +52,13 @@ public abstract class PrintedThings
 
     /**
      * Implements the logic to print the array list of tasks sorted by due date or project as
-     * desired by the user
+     *  desired by the user
      * This is option 2 of the To-Do main user menu
-     * @param toDoList
+     * @param toDoList //todo fix this; what does it want?? Look at Javadocs
      * @return void
      */
 
+    //Todo: write a for each loop to make the tasks display line by line
     public static void viewList(ArrayList<Task> toDoList)
     {
         System.out.println("View tasks by date or project? (Enter 1 or 2)");
@@ -101,7 +99,7 @@ public abstract class PrintedThings
         String editType = getUserInput();
 
         System.out.println("Which task would you like to edit?: \n");
-        System.out.println("Task : Due date : Pending? : Project name");
+        System.out.println("#: Task : Due date : Pending? : Project name");
         for (int i = 0; i < toDoList.size(); i++)
         {
             System.out.print(i+1 + ": ");
@@ -109,6 +107,7 @@ public abstract class PrintedThings
         }
 
         String taskNumber = getUserInput();
+        // Since getUserInput returns strings, need to cast this to an int to use as arraylist index number
         int taskNumberInt = Integer.parseInt(taskNumber);
 
         if (editType.equals("1"))
@@ -119,10 +118,10 @@ public abstract class PrintedThings
                     "(3) Status\n" +
                     "(4) Project name");
 
-            String taskAttribute = getUserInput();
+            String taskAttributeToEdit = getUserInput();
 
             // Edit task name
-            if (taskAttribute.equals("1"))
+            if (taskAttributeToEdit.equals("1"))
             {
                 System.out.println("Enter new task name here: ");
                 String newTaskName = getUserInput();
@@ -130,7 +129,7 @@ public abstract class PrintedThings
             }
 
             // Edit due date
-            else if (taskAttribute.equals("2"))
+            else if (taskAttributeToEdit.equals("2"))
             {
                 System.out.println("Enter new due date here: ");
                 LocalDate newDueDate = getDueDate();
@@ -139,7 +138,7 @@ public abstract class PrintedThings
 
             // Change project status
             // Gets current status and changes it to the opposite status
-            else if (taskAttribute.equals("3"))
+            else if (taskAttributeToEdit.equals("3"))
             {
                 System.out.println("Change current task status? (Y/N)");
                 String areYouSure = getUserInput().toUpperCase();
@@ -153,7 +152,7 @@ public abstract class PrintedThings
             }
 
             // Edit project name
-            else if(taskAttribute.equals("4"));
+            else if(taskAttributeToEdit.equals("4"))
             {
                 System.out.println("Enter edited project name here: \n" +
                                     "Press enter if there is no project ");
@@ -173,11 +172,30 @@ public abstract class PrintedThings
         // user wants to update task status
         else if (editType.equals("2"))
         {
+            System.out.println("Change chosen task status? (Y/N)");
+            String areYouSure = getUserInput().toUpperCase();
 
+            if (areYouSure.equals("Y") || areYouSure.equals("YES"))
+            {
+                Boolean oldStatus = toDoList.get(taskNumberInt).getTaskPending();
+                Boolean newStatus = oldStatus ? false : true;
+                toDoList.get(taskNumberInt-1).setTaskPending(newStatus);
+            }
         }
 
+        // user wants to remove chosen task from to-do list
+        else if (editType.equals("3"))
+        {
+            System.out.println("Are you sure you want to remove " +
+                    toDoList.get(taskNumberInt-1).getProjectName() +
+                    " from the list?");
+            String areYouSure = getUserInput().toUpperCase();
+            if (areYouSure.equals("Y") || areYouSure.equals("YES"))
+            {
+                toDoList.remove(taskNumberInt-1);
+            }
+        }
     }
-
     /**
      * Simple scanner to get user input and return as string
      * @return String
@@ -189,7 +207,9 @@ public abstract class PrintedThings
         return userChoice;
     }
 
-
-
+    public static void printToDoList()
+    {
+        //todo, finish this, look at string formatting!!
+    }
 }
-//todo change all scanner code to pull the getUserInput method instead
+

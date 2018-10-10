@@ -31,6 +31,14 @@ public class Task
         this.dueDate = dueDate;
     }
 
+    public Task (String taskName, String projectName, LocalDate dueDate, Boolean taskPending)
+    {
+        this.taskName = taskName;
+        this.projectName = projectName;
+        this.dueDate = dueDate;
+        this.taskPending = taskPending;
+    }
+
     public String getTaskName() {
         return taskName;
     }
@@ -69,8 +77,7 @@ public class Task
         System.out.print("Project: ");
         System.out.println(">");
         System.out.print("No project, no problem, just hit enter");
-        Scanner userInput = new Scanner(System.in);
-        String projectName = userInput.nextLine();
+        String projectName = PrintedThings.getUserInput();
 
         if (projectName.length() > 0)
         {
@@ -87,8 +94,6 @@ public class Task
     @Override
     public String toString()
     {
-        return String.format("%s\t%s\t%s\t%s", taskName, dueDate,taskPending,projectName);
+        return String.format("%s\t%s\t%s\t%s", taskName, dueDate, taskPending, projectName);
     }
-
-
-    }
+}

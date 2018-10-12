@@ -1,6 +1,7 @@
 package com.singhblom;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 /**
@@ -24,7 +25,7 @@ public abstract class PrintedThings
         System.out.println("At any time, enter bye if you would like to quit");
     }
 
-    public static String getTask()
+    public static String queryTaskName()
     {
         System.out.print("To Do: ");
         System.out.print("> ");
@@ -32,17 +33,27 @@ public abstract class PrintedThings
         return taskName;
     }
 
-    public static LocalDate getDueDate()
+    public static LocalDate queryDueDate()
     {
         System.out.print("Due on: (YYYY-MM-DD) ");
         System.out.print("> ");
-        LocalDate taskDueDate = LocalDate.parse(getUserInput());
+        LocalDate taskDueDate;
+        try
+        {
+            taskDueDate = LocalDate.parse(getUserInput());
+        }
+        catch (DateTimeParseException ex)
+        {
+            System.out.println("Uh Oh! You need to enter the date as YYYY-MM-DD!!");
+            taskDueDate = queryDueDate();
+        }
+
         return taskDueDate;
     }
 
     public static void mainUserOptions()
     {
-        System.out.println("Pick an option:\n" +
+        System.out.println("Pick an option: (...or type bye to exit!)\n" +
                 "(1) Add New Task\n" +
                 "(2) Show Task List (by date or project)\n" +
                 "(3) Edit Task (update, mark as done, remove)\n" +
@@ -132,7 +143,7 @@ public abstract class PrintedThings
             else if (taskAttributeToEdit.equals("2"))
             {
                 System.out.println("Enter new due date here: ");
-                LocalDate newDueDate = getDueDate();
+                LocalDate newDueDate = queryDueDate();
                 toDoList.get(taskNumberInt-1).setDueDate(newDueDate);
             }
 
@@ -140,15 +151,7 @@ public abstract class PrintedThings
             // Gets current status and changes it to the opposite status
             else if (taskAttributeToEdit.equals("3"))
             {
-                System.out.println("Change current task status? (Y/N)");
-                String areYouSure = getUserInput().toUpperCase();
-
-                if (areYouSure.equals("Y") || areYouSure.equals("YES"))
-                {
-                    Boolean oldStatus = toDoList.get(taskNumberInt).getTaskPending();
-                    Boolean newStatus = oldStatus ? false : true;
-                    toDoList.get(taskNumberInt-1).setTaskPending(newStatus);
-                }
+                changeTaskStatus(toDoList, taskNumberInt, "Change current task status? (Y/N)");
             }
 
             // Edit project name
@@ -172,15 +175,7 @@ public abstract class PrintedThings
         // user wants to update task status
         else if (editType.equals("2"))
         {
-            System.out.println("Change chosen task status? (Y/N)");
-            String areYouSure = getUserInput().toUpperCase();
-
-            if (areYouSure.equals("Y") || areYouSure.equals("YES"))
-            {
-                Boolean oldStatus = toDoList.get(taskNumberInt).getTaskPending();
-                Boolean newStatus = oldStatus ? false : true;
-                toDoList.get(taskNumberInt-1).setTaskPending(newStatus);
-            }
+            changeTaskStatus(toDoList, taskNumberInt, "Change chosen task status? (Y/N)");
         }
 
         // user wants to remove chosen task from to-do list
@@ -196,6 +191,18 @@ public abstract class PrintedThings
             }
         }
     }
+
+    private static void changeTaskStatus(ArrayList<Task> toDoList, int taskNumberInt, String s) {
+        System.out.println(s);
+        String areYouSure = getUserInput().toUpperCase();
+
+        if (areYouSure.equals("Y") || areYouSure.equals("YES")) {
+            Boolean oldStatus = toDoList.get(taskNumberInt).getTaskPending();
+            Boolean newStatus = oldStatus ? false : true;
+            toDoList.get(taskNumberInt - 1).setTaskPending(newStatus);
+        }
+    }
+
     /**
      * Simple scanner to get user input and return as string
      * @return String

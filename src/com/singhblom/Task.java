@@ -1,5 +1,6 @@
 package com.singhblom;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,24 +14,36 @@ import java.util.Scanner;
  * - name of the task and project as strings
  * - and date as LocalDate
  * - and status as boolean
+ * @author Amrita Singh-Blom
  */
 
-
-
-public class Task
+public class Task implements Serializable
 {
+    // By default, the task is assumed to be pending at the time of the task-object instantiation
     private String taskName;
     private String projectName = "";
     private LocalDate dueDate;
     private Boolean taskPending = true;
 
-    // The task is assumed to be pending at the time of the task-object instantiation
+    /**
+     * This Task constructor makes a Task object with Task name and the due date
+     *  supplied as arguments and project and task pending status set to default values
+     * @param taskName
+     * @param dueDate
+     */
     public Task (String taskName, LocalDate dueDate)
     {
         this.taskName = taskName;
         this.dueDate = dueDate;
     }
 
+    /**
+     * This Task constructor makes a task with all fields being supplied as arguments
+     * @param taskName
+     * @param projectName
+     * @param dueDate
+     * @param taskPending
+     */
     public Task (String taskName, String projectName, LocalDate dueDate, Boolean taskPending)
     {
         this.taskName = taskName;

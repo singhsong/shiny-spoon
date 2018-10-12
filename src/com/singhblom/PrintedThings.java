@@ -42,7 +42,7 @@ public abstract class PrintedThings
 
     public static void mainUserOptions()
     {
-        System.out.println("Pick an option:\n" +
+        System.out.println("Pick an option: (type bye to exit)\n" +
                 "(1) Add New Task\n" +
                 "(2) Show Task List (by date or project)\n" +
                 "(3) Edit Task (update, mark as done, remove)\n" +

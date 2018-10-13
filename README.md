@@ -19,9 +19,6 @@ The application will allow a user to:
  - and due date,
  - and choose a project for that task to belong to.
 
-They will need to use a text based user interface via the command-line
-(hint: see ​World of Zuul project for some ideas on this).
-
 Once they are using the application, the user should be able to:
  - also edit,
  - mark as done
@@ -58,11 +55,22 @@ The solution __must__ achieve the following requirements:
 - Support a text-based user interface
 - Load and save task list to file
 
-The solution *may* also include other creative features at your discretion
-in case you wish to show some flair(​but this will not affect the default
-evaluation -- see checklist​).
+#### Solution
 
-#### ToDo
+The final to-do list application contained three classes as follows (see class diagram).
+![To-do List Class diagram](uml.png)
 
-- [ ] Set up task class
-     - [ ] Done, removed, pending subclasses?
+##### User Manual
+- On starting the program, the user's previous to-do List is loaded
+- The user is prompted to enter their names and are greeted with a message and options
+- By entering the number of the option as displayed, the user can choose what they would like to do, viz, 
+    * Enter a new task
+    * Edit/update a preexisting task
+    * View a sorted task list
+    * Save and exit the program
+- In the main menu, the user has the option to enter bye to exit the program.
+    
+##### Known limitations
+- The user cannot create multiple to-do lists. This is because I couldn't figure out how to search for all the saved task lists and then offer the user the option of selecting a specific one to load. 
+- The text-based interface is not visually appealing. This is definitely something I need to learn and try out.
+

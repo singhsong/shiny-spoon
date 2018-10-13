@@ -11,6 +11,14 @@ import java.util.*;
 
 public abstract class PrintedThings
 {
+    public static void enterNewTask(ArrayList<Task> toDoList) {
+        String taskName = PrintedThings.queryTaskName();
+        LocalDate taskDate = PrintedThings.queryDueDate();
+        Task newTask = new Task(taskName,taskDate);
+        newTask.whichProject();
+        toDoList.add(newTask);
+    }
+
     public static String getUserName()
     {
         System.out.println("Hi! Whats your name?");
@@ -21,8 +29,6 @@ public abstract class PrintedThings
     public static void welcomeMessage(String userName)
     {
         System.out.println("Hello "+ userName + " and welcome to your ToDo list");
-        System.out.println("Please enter your tasks below");
-        System.out.println("At any time, enter bye if you would like to quit");
     }
 
     public static String queryTaskName()
@@ -53,7 +59,7 @@ public abstract class PrintedThings
 
     public static void mainUserOptions()
     {
-        System.out.println("Pick an option: (...or type bye to exit!)\n" +
+        System.out.println("\nPick an option: (...or type bye to exit!)\n" +
                 "(1) Add New Task\n" +
                 "(2) Show Task List (by date or project)\n" +
                 "(3) Edit Task (update, mark as done, remove)\n" +
@@ -66,7 +72,6 @@ public abstract class PrintedThings
      *  desired by the user
      * This is option 2 of the To-Do main user menu
      * @param toDoList //todo fix this; what does it want?? Look at Javadocs
-     * @return void
      */
 
     //Todo: write a for each loop to make the tasks display line by line
@@ -95,8 +100,7 @@ public abstract class PrintedThings
      *  edit a task, mark as done or remove a task
      * Editing a task can include changes to any fields: changing the task name, adding a project,
      *  updating the due date
-     * @param toDoList
-     * @return void
+     * @param toDoList arrayList
      */
     public static void updateTaskList(ArrayList<Task> toDoList)
     {
@@ -114,44 +118,72 @@ public abstract class PrintedThings
         // Since getUserInput returns strings, need to cast this to an int to use as arraylist index number
         int taskNumberInt = Integer.parseInt(taskNumber);
 
-        if (editType.equals("1"))
+        switch(editType)
         {
-            System.out.println("What do you want to update:\n" +
-                    "(1) Task name\n" +
-                    "(2) Due date\n" +
-                    "(3) Status\n" +
-                    "(4) Project name");
+            case("1"): //Update task
+            {
+                updateTaskSubOptions(toDoList, taskNumberInt);
+                break;
+            }
 
-            String taskAttributeToEdit = getUserInput();
+            case ("2"): //Mark task as done
+            {
+                changeTaskStatus(toDoList, taskNumberInt, "Change chosen task status? (Y/N)");
+                break;
+            }
 
-            // Edit task name
-            if (taskAttributeToEdit.equals("1"))
+            case("3"): //Remove task from list
+            {
+                System.out.println("Are you sure you want to remove " +
+                        toDoList.get(taskNumberInt-1).getTaskName() +
+                        " from the list? (Y/N)");
+                String areYouSure = getUserInput().toUpperCase();
+                if (areYouSure.equals("Y") || areYouSure.equals("YES"))
+                {
+                    toDoList.remove(taskNumberInt-1);
+                }
+                break;
+            }
+
+        }
+        }
+
+    public static void updateTaskSubOptions(ArrayList<Task> toDoList, int taskNumberInt)
+    {
+        System.out.println("\nWhat do you want to update:\n" +
+                "(1) Task name\n" +
+                "(2) Due date\n" +
+                "(3) Status\n" +
+                "(4) Project name");
+
+        String taskAttributeToEdit = getUserInput();
+
+        switch(taskAttributeToEdit)
+        {
+            case("1"): //Update task name
             {
                 System.out.println("Enter new task name here: ");
                 String newTaskName = getUserInput();
                 toDoList.get(taskNumberInt-1).setTaskName(newTaskName);
+                break;
             }
-
-            // Edit due date
-            else if (taskAttributeToEdit.equals("2"))
+            case("2"): //Update Due date
             {
                 System.out.println("Enter new due date here: ");
                 LocalDate newDueDate = queryDueDate();
                 toDoList.get(taskNumberInt-1).setDueDate(newDueDate);
+                break;
             }
 
-            // Change project status
-            // Gets current status and changes it to the opposite status
-            else if (taskAttributeToEdit.equals("3"))
+            case("3"): // Update task status
             {
                 changeTaskStatus(toDoList, taskNumberInt, "Change current task status? (Y/N)");
+                break;
             }
-
-            // Edit project name
-            else if(taskAttributeToEdit.equals("4"))
+            case("4"): //Update project name
             {
                 System.out.println("Enter edited project name here: \n" +
-                                    "Press enter if there is no project ");
+                        "Press enter if there is no project ");
                 String newProjectName = getUserInput();
                 if (newProjectName.length() > 0)
                 {
@@ -162,25 +194,7 @@ public abstract class PrintedThings
                     newProjectName = "No project";
                     toDoList.get(taskNumberInt-1).setProjectName(newProjectName);
                 }
-            }
-        }
-
-        // user wants to update task status
-        else if (editType.equals("2"))
-        {
-            changeTaskStatus(toDoList, taskNumberInt, "Change chosen task status? (Y/N)");
-        }
-
-        // user wants to remove chosen task from to-do list
-        else if (editType.equals("3"))
-        {
-            System.out.println("Are you sure you want to remove " +
-                    toDoList.get(taskNumberInt-1).getProjectName() +
-                    " from the list?");
-            String areYouSure = getUserInput().toUpperCase();
-            if (areYouSure.equals("Y") || areYouSure.equals("YES"))
-            {
-                toDoList.remove(taskNumberInt-1);
+                break;
             }
         }
     }
@@ -200,7 +214,7 @@ public abstract class PrintedThings
 
         if (areYouSure.equals("Y") || areYouSure.equals("YES")) {
             Boolean oldStatus = toDoList.get(taskNumberInt).getTaskPending();
-            Boolean newStatus = oldStatus ? false : true;
+            Boolean newStatus = !oldStatus;
             toDoList.get(taskNumberInt - 1).setTaskPending(newStatus);
         }
     }
@@ -213,14 +227,8 @@ public abstract class PrintedThings
     {
         Scanner userInput = new Scanner(System.in);
         String userChoice = userInput.nextLine();
+        userInput.close();
         return userChoice;
     }
-
-//    public static void printToDoList()
-//    {
-//        String format = "%-40s%s%n";
-//        System.out.printf(format, prefix1, msg);
-//        System.out.printf(format, prefix2, msg);
-//    }
 }
 

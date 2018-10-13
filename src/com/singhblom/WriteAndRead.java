@@ -25,7 +25,7 @@ public class WriteAndRead
         {
             //ex.printStackTrace();
             System.out.println("Problems opening the previously saved file");
-            toDoList = new ArrayList<Task>();
+            toDoList = new ArrayList<>();
         }
         return toDoList;
     }
@@ -33,7 +33,7 @@ public class WriteAndRead
 
     /**
      * This method saves the to-do list and quits the program
-     * @param toDoList
+     * @param toDoList arrayList
      */
     public static void saveAndQuit(ArrayList<Task> toDoList)
     {
@@ -55,6 +55,7 @@ public class WriteAndRead
             System.out.println("Problems with in/out");
         }
 
+        System.out.println("Bye!!");
         System.exit(0);
 
 

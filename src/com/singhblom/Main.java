@@ -16,6 +16,8 @@ public class Main
     {
         PrintedThings.welcomeMessage(PrintedThings.getUserName());
 
+        ArrayList<Task> toDoList = WriteAndRead.readAndRestore();
+
         //System.out.println(task1.getTaskName() +" due on "+ task1.queryDueDate().toString());
 
         //System.out.println(task1.getTaskName() + task1.queryDueDate().toString() + task1.getProjectName());
@@ -24,17 +26,16 @@ public class Main
         //The to-do list mainUserOptions are executed via a switch-case
 
         String option;
-        ArrayList<Task> toDoList = new ArrayList<>();
-        toDoList.add(new Task("Complete code", "Studies", LocalDate.parse("2019-11-04"), true));
-        toDoList.add(new Task("Cook", "life", LocalDate.parse("2018-10-05"), true));
-        toDoList.add(new Task("Wash the dog", "life", LocalDate.parse("2018-09-01"), false));
-        toDoList.add(new Task("Book tickets", "life", LocalDate.parse("2019-01-26"), true));
-        toDoList.add(new Task("Book dentists appointment","life", LocalDate.parse("2018-11-13"), true));
-        toDoList.add(new Task("Go to the gym", "studies", LocalDate.parse("2019-08-21"), true));
-        toDoList.add(new Task("first draft","professional", LocalDate.parse("2018-11-13"), true));
-        toDoList.add(new Task("kill reviewer #2","professional", LocalDate.parse("2018-11-13"), true));
-        toDoList.add(new Task("Hang out with friends","No project", LocalDate.parse("2018-06-10"), true));
-        toDoList.add(new Task("Go on vacation","No project", LocalDate.parse("2018-02-01"), true));
+//        toDoList.add(new Task("Complete code", "Studies", LocalDate.parse("2019-11-04"), true));
+//        toDoList.add(new Task("Cook", "life", LocalDate.parse("2018-10-05"), true));
+//        toDoList.add(new Task("Wash the dog", "life", LocalDate.parse("2018-09-01"), false));
+//        toDoList.add(new Task("Book tickets", "life", LocalDate.parse("2019-01-26"), true));
+//        toDoList.add(new Task("Book dentists appointment","life", LocalDate.parse("2018-11-13"), true));
+//        toDoList.add(new Task("Go to the gym", "studies", LocalDate.parse("2019-08-21"), true));
+//        toDoList.add(new Task("first draft","professional", LocalDate.parse("2018-11-13"), true));
+//        toDoList.add(new Task("kill reviewer #2","professional", LocalDate.parse("2018-11-13"), true));
+//        toDoList.add(new Task("Hang out with friends","No project", LocalDate.parse("2018-06-10"), true));
+//        toDoList.add(new Task("Go on vacation","No project", LocalDate.parse("2018-02-01"), true));
 
 
         do
@@ -53,7 +54,7 @@ public class Main
                     newTask.whichProject();
                     //System.out.println(newTask.getTaskName() + newTask.queryDueDate().toString() + newTask.getProjectName());
                     toDoList.add(newTask);
-                    System.out.println(toDoList.toString()); //todo: write to string method for task
+                    PrintedThings.formattedTaskList(toDoList);
                     break;
                 }
 

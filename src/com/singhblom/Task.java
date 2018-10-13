@@ -1,5 +1,6 @@
 package com.singhblom;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,7 +18,7 @@ import java.util.Scanner;
 
 
 
-public class Task
+public class Task implements Serializable
 {
     private String taskName;
     private String projectName = "";

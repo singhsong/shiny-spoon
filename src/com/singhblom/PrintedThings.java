@@ -80,16 +80,14 @@ public abstract class PrintedThings
         if (sortBy.equals("1"))
         {
             Collections.sort(toDoList, Comparator.comparing(Task::getDueDate));
-            System.out.println(toDoList.toString());
         }
 
         //Sorts by project name first and within a project, by due date, ascending
         else if (sortBy.equals("2"))
         {
             Collections.sort(toDoList, Comparator.comparing(Task::getProjectName).thenComparing(Task::getDueDate));
-            System.out.println(toDoList.toString());
         }
-        // todo add an error exception handling here to send back to main menu or while loop?
+        formattedTaskList(toDoList);
     }
 
     /**
@@ -110,12 +108,7 @@ public abstract class PrintedThings
         String editType = getUserInput();
 
         System.out.println("Which task would you like to edit?: \n");
-        System.out.println("#: Task : Due date : Pending? : Project name");
-        for (int i = 0; i < toDoList.size(); i++)
-        {
-            System.out.print(i+1 + ": ");
-            System.out.println(toDoList.get(i).toString());
-        }
+        formattedTaskList(toDoList);
 
         String taskNumber = getUserInput();
         // Since getUserInput returns strings, need to cast this to an int to use as arraylist index number
@@ -192,6 +185,15 @@ public abstract class PrintedThings
         }
     }
 
+    public static void formattedTaskList(ArrayList<Task> toDoList) {
+        System.out.println("#: Task : Due date : Pending? : Project name");
+        for (int i = 0; i < toDoList.size(); i++)
+        {
+            System.out.print(i+1 + ": ");
+            System.out.println(toDoList.get(i).toString());
+        }
+    }
+
     private static void changeTaskStatus(ArrayList<Task> toDoList, int taskNumberInt, String s) {
         System.out.println(s);
         String areYouSure = getUserInput().toUpperCase();
@@ -214,9 +216,11 @@ public abstract class PrintedThings
         return userChoice;
     }
 
-    public static void printToDoList()
-    {
-        //todo, finish this, look at string formatting!!
-    }
+//    public static void printToDoList()
+//    {
+//        String format = "%-40s%s%n";
+//        System.out.printf(format, prefix1, msg);
+//        System.out.printf(format, prefix2, msg);
+//    }
 }
 
